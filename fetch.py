@@ -118,7 +118,7 @@ def patch_ocdids():
 
         patch_file(f"sldl/{fips}", lambda p: f"{prefix}/sldl:{p['SLDLST'].lstrip('0')}")
         patch_file(
-            f"sldu/{fips}", lambda p: f"{prefix}/sldl:{p['SLDUST'].lower().lstrip('0')}"
+            f"sldu/{fips}", lambda p: f"{prefix}/sldu:{p['SLDUST'].lower().lstrip('0')}"
         )
         patch_file(f"congress/{fips}", functools.partial(congress_callback, prefix))
 

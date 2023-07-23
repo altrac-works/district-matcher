@@ -10,6 +10,12 @@ body {
     font-family: sans-serif;
     max-width: 60em;
 }
+@media print {
+    body {
+        font-size: 12pt;
+        max-width: 100%;
+    }
+}
 @media(prefers-color-scheme: dark) {
     body { background-color: #454955; color: #f3eff5; }
     a, a:visited { color: #a5e250; }
@@ -26,7 +32,7 @@ body > ul > li {
         <p>Best explained as an example, with <code>curl</code>:</p>
         <pre>
 <strong>$ curl -A "mycoolsoftware/1.1 your.contact.email@whatever.com" \
-    "<a href="https://districts.tris.fyi/v1/match.json?lat=38.762&lon=-77.593" target="_blank">https://districts.tris.fyi/v1/match.json?lat=38.762&lon=-77.593</a>"</strong>
+    "<a href="https://districts.socialism.gay/v1/match.json?lat=38.762&lon=-77.593" target="_blank">https://districts.socialism.gay/v1/match.json?lat=38.762&lon=-77.593</a>"</strong>
 {
     "ocdids": [
         "ocd-division/country:us/state:va",
@@ -85,5 +91,10 @@ body > ul > li {
         </ul>
         <h2>Feedback</h2>
         <p>You can email <code>district-matcher-help@tris.fyi</code> for <strong>best-effort</strong> support, bug reports, data quality issues, and so on.</p>
+        <h2>Acknowledgements</h2>
+        <ul>
+            <li><a href="https://tris.fyi">Tris</a> made this.<!-- I hope you'd be proud, Mom. <3 --></li>
+            <li>Data is from the <a href="https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html">US Census TIGER/Line dataset</a>. Thank y'all so much!</li>
+        </ul>
     </body>
 </html>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Tris's US Legislative District Matching Tool</title>
+        <title>Tris's US Legislative District Matching Emporium</title>
 <style>
 body {
     margin: 1em;
@@ -41,6 +41,26 @@ body > ul > li {
         </pre>
         <p>Please note the following from this example:</p>
         <ul>
+            <li>
+                The response will contain a list of <a href="https://opencivicdata.info/en/latest/ocdids.html">OCD Identifiers</a>.
+                <ul>
+                    <li>The district number prefixes mean the following:
+                        <ul>
+                            <li><code>cd</code> is a <strong>C</strong>ongressional <strong>D</strong>istrict</li>
+                            <li><code>sldl</code> is a <strong>S</strong>tate <strong>L</strong>egislative <strong>D</strong>istrict (<strong>L</strong>ower house, like a General Assembly or State House of Representatives)</li>
+                            <li><code>sldu</code> is a <strong>S</strong>tate <strong>L</strong>egislative <strong>D</strong>istrict (<strong>U</strong>pper house, like a State Senate)</li>
+                        </ul>
+                    </li>
+                    <li>There are a few oddities in the OCD Identifier set that you should be aware of:
+                        <ul>
+                            <li>DC is a <code>district:dc</code>, not a <code>state:dc</code>. It has <code>sldu</code> districts which correspond to DC Council wards.</li>
+                            <li>States that only have at-large congressional districts use <code>cd:at-large</code> instead of a numbered district (Alaska, Delaware, North Dakota, South Dakota, Vermont, Wyoming).</li>
+                            <li>Massachusetts, Vermont, and New Hampshire <code>sldl</code> and <code>sldu</code> identifiers are based on the towns the districts consist of.</li>
+                            <li>Vermont does the same with their <code>sldu</code> identifiers.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
             <li>You <strong>must</strong> send a User-Agent header (the <code>-A</code> option to <code>curl</code>) that includes your contact email. Otherwise you might be blocked from using the API based on someone else's abuse.</li>
             <li>All values in the <code>perf</code> section are subject to change at any time, with no warning. All other keys should be ~stable.</li>
         </ul>
@@ -58,6 +78,7 @@ body > ul > li {
         <h2>Known limitations</h2>
         <ul>
             <li>If you hit a state that isn't in cache it'll be slow. Cache lasts for a while though, and matching should be very fast (100/s or greater)</li>
+            <li>US territories aren't properly supported right now.</li>
             <li>No data on representatives is provided currently, just the districts. I'd recommend the <a href="https://github.com/openstates/people">Open States People</a> dataset (and maybe I'll add support for this dataset in the future)!</li>
             <li>District borders and OCD-IDs are correct to the best of my knowledge and ability. Districts should be current for the 118th Congress / 2022 redistricting cycle, <em>except for states that are (or have been, in 2022/2023) in litigation over their maps.</em></li>
             <li>Only congressional districts and state legislative districts are provided. I'd love to talk about adding city council and county commission districts! Just send me an email.</li>

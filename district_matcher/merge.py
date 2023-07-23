@@ -1,7 +1,7 @@
 import json
 import os
 
-from fetch import load_states
+from .fetch import load_states
 
 cat = "sldl"
 

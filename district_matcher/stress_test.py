@@ -4,7 +4,7 @@ import os
 import random
 import time
 
-from match import USDistrictsMatcher
+from .match import USDistrictsMatcher
 
 
 def gen_point():

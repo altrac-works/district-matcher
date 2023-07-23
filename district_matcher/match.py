@@ -47,13 +47,14 @@ class Shapefile:
 
 
 class Matcher:
-    def __init__(self):
+    def __init__(self, lazy=True):
         self.shapefiles = []
         for shapefile_name in self.default_shapefiles():
             self.shapefiles.append(Shapefile.load(shapefile_name))
 
-        for shapefile_name in self.preloaded_shapefiles():
-            Shapefile.load(shapefile_name)
+        if not lazy:
+            for shapefile_name in self.preloaded_shapefiles():
+                Shapefile.load(shapefile_name)
 
     def default_shapefiles(self):
         return []

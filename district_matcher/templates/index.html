@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Tris's US Legislative District Matching Tool</title>
+<style>
+body {
+    margin: 1em;
+    font-size: 14pt;
+    line-height: 1.6;
+    font-family: sans-serif;
+    max-width: 60em;
+}
+@media(prefers-color-scheme: dark) {
+    body { background-color: #454955; color: #f3eff5; }
+    a, a:visited { color: #a5e250; }
+}
+body > ul > li {
+    margin-bottom: 0.4em;
+}
+</style>
+    </head>
+    <body>
+        <h1>Welcome to Tris's US&nbsp;Legislative&nbsp;District Matching&nbsp;Emporium</h1>
+        <p>Have you ever had a (latitude, longitude) coordinate and needed to know what United States legislative districts represented the folks living at that coordinate? You may <strike>be entitled to financial compensation</strike> benefit from this API!</p>
+        <h2>How to use</h2>
+        <p>Best explained as an example, with <code>curl</code>:</p>
+        <pre>
+<strong>$ curl -A "mycoolsoftware/1.1 your.contact.email@whatever.com" \
+    "<a href="https://districts.tris.fyi/v1/match.json?lat=38.762&lon=-77.593" target="_blank">https://districts.tris.fyi/v1/match.json?lat=38.762&lon=-77.593</a>"</strong>
+{
+    "ocdids": [
+        "ocd-division/country:us/state:va",
+        "ocd-division/country:us/state:va/cd:10",
+        "ocd-division/country:us/state:va/sldl:22",
+        "ocd-division/country:us/state:va/sldu:30"
+    ],
+    "perf": {
+        "match_time_ms": 10.716
+    }
+}
+        </pre>
+        <p>Please note the following from this example:</p>
+        <ul>
+            <li>You <strong>must</strong> send a User-Agent header (the <code>-A</code> option to <code>curl</code>) that includes your contact email. Otherwise you might be blocked from using the API based on someone else's abuse.</li>
+            <li>All values in the <code>perf</code> section are subject to change at any time, with no warning. All other keys should be ~stable.</li>
+        </ul>
+        <h2>Terms of use</h2>
+        <ul>
+            <li>The only permitted uses of this service are the following. If your use doesn't fall under one of these categories, email the address listed below.
+                <ul>
+                    <li>Providing support to progressive political campaigns (issue campaigns count) in the US.</li>
+                    <li>Understanding and counteracting partisan gerrymandering in the US.</li>
+                    <li>Nonpartisan personal or research use.</li>
+                </ul>
+            </li>
+            <li>You should be reasonable with your request rates (try to keep it at less than 60 requests per minute, if you need more please send me an email).</li>
+        </ul>
+        <h2>Known limitations</h2>
+        <ul>
+            <li>If you hit a state that isn't in cache it'll be slow. Cache lasts for a while though, and matching should be very fast (100/s or greater)</li>
+            <li>No data on representatives is provided currently, just the districts. I'd recommend the <a href="https://github.com/openstates/people">Open States People</a> dataset (and maybe I'll add support for this dataset in the future)!</li>
+            <li>District borders and OCD-IDs are correct to the best of my knowledge and ability. Districts should be current for the 118th Congress / 2022 redistricting cycle, <em>except for states that are (or have been, in 2022/2023) in litigation over their maps.</em></li>
+            <li>Only congressional districts and state legislative districts are provided. I'd love to talk about adding city council and county commission districts! Just send me an email.</li>
+        </ul>
+        <h2>Feedback</h2>
+        <p>You can email <code>district-matcher-help@tris.fyi</code> for <strong>best-effort</strong> support, bug reports, data quality issues, and so on.</p>
+    </body>
+</html>

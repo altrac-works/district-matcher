@@ -1,6 +1,8 @@
+import csv
 import functools
 import json
 import logging
+import os
 from typing import Iterable
 
 import shapely
@@ -50,6 +52,9 @@ class Matcher:
         for shapefile_name in self.default_shapefiles():
             self.shapefiles.append(Shapefile.load(shapefile_name))
 
+        for shapefile_name in self.preloaded_shapefiles():
+            Shapefile.load(shapefile_name)
+
     def default_shapefiles(self):
         return []
 
@@ -75,6 +80,9 @@ class Matcher:
             result.append(feature)
 
             for shapefile_name in self.match_callback(feature, tier):
+                if not os.path.exists(shapefile_name):
+                    continue
+
                 candidate = Shapefile.load(shapefile_name).find_intersecting_feature(
                     point
                 )
@@ -88,6 +96,25 @@ class Matcher:
 class USDistrictsMatcher(Matcher):
     def default_shapefiles(self):
         return ["out/states/states.geojson"]
+
+    def preloaded_shapefiles(self):
+        with open("data/fips.csv") as f:
+            fips = [i[0] for i in csv.reader(f)]
+
+        result = []
+
+        for code in fips:
+            for fname in [
+                f"out/congress/{code}.geojson",
+                f"out/sldl/{code}.geojson",
+                f"out/sldu/{code}.geojson",
+            ]:
+                if not os.path.exists(fname):
+                    continue
+
+                result.append(fname)
+
+        return result
 
     def match_callback(self, feature, tier):
         if tier > 0:
